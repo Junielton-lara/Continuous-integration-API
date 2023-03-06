@@ -95,7 +95,7 @@ jobs:
           mkdir -p allure-results
 
       - name: Step 3 Execute collection
-        run: newman run ./test.json -e ./qa.json -r allure --reporter-allure-export allure_results
+        run: newman run ./test.json -e ./qa.json -r allure --reporter-allure-export allure-report
 
 
       - name: Get Allure history
