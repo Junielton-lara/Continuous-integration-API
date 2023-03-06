@@ -137,7 +137,10 @@ jobs:
 
       - name: Step 3 Execute collection
         run: newman run ./test.json -e ./qa.json -r allure --reporter-allure-export allure-report
+
+      - name: mostrar camiinho
         run: echo $PWD
+      - name: listar pasta
         run: ls
 
 
