@@ -137,7 +137,8 @@ jobs:
 
       - name: Step 3 Execute collection
         run: newman run ./test.json -e ./qa.json -r allure --reporter-allure-export allure-report
-         run: dir
+        run: echo $PWD
+        run: ls
 
 
       - name: Get Allure history
