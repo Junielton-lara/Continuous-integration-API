@@ -104,7 +104,6 @@ jobs:
     - name: Step 3 npm install -g newman-reporter-allure
       run: sudo npm install -g newman-reporter-allure
         
-
     - name: Step 3 Execute collection
       run: newman run ./test.json -e ./qa.json -r allure --reporter-allure-export allure-report
 
