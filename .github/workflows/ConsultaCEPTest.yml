@@ -29,6 +29,9 @@ jobs:
 
     - name: install -g newman-reporter-allure
       run: sudo npm install -g newman-reporter-allure
+      
+    - name: npm install -g newman-reporter-allure
+      run: npm install -g newman-reporter-allure
 
     - name: Set up Allure CLI
       run: |
@@ -55,22 +58,7 @@ jobs:
     - name: ls
       run: ls
   
-    - name: npm install -g newman-reporter-allure
-      run: npm install -g newman-reporter-allure
-
-    - name: newman run test.json -e qa.json -r allure --reporter-allure-export allure-report
-      run: newman run ./test.json -e ./qa.json -r allure --reporter-allure-export allure-report
-
-    - name: ls
-      run: ls
-
-    # - name: allure generate allure-results --clean -o allure-report
-    #   run: allure generate allure-results --clean -o allure-report
-
-      
-
-    - name: ls
-      run: ls
+     
 
     - name: Deploy report to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
