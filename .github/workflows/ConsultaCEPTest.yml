@@ -48,17 +48,9 @@ jobs:
     - name: ls
       run: ls
 
-    # - name: Deploy report to GitHub Pages
-    #   uses: peaceiris/actions-gh-pages@v3
-    #   with:
-    #     github_token: ${{ secrets.GITHUB_TOKEN }}
-    #     publish_dir: ./allure-report
-
-
-        with:
-          ref: gh-pages
-          path: gh-pages
-
+    - name: Deploy report to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
       - name: Allure Report action from marketplace
         uses: simple-elf/allure-report-action@master
         if: always()
@@ -76,6 +68,10 @@ jobs:
           PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PUBLISH_BRANCH: gh-pages
           PUBLISH_DIR: allure-history
+
+
+
+
 
 
 
