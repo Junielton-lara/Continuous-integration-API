@@ -32,7 +32,6 @@ jobs:
 
     - name: npm install --save-dev allure-commandline
       run: sudo npm install --save-dev allure-commandline
-      
 
 
     - name: Run Postman tests
