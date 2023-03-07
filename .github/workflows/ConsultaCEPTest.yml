@@ -33,21 +33,14 @@ jobs:
     - name: npm install --save-dev allure-commandline
       run: sudo npm install --save-dev allure-commandline
 
-    - name: ls
-      run: ls
-
-
-    - name: Run Postman tests
-      run: npm run postman-test
-
-    - name: Run ls
-      run: npm run ls
+    # - name: Run Postman tests
+    #   run: npm run postman-test
 
     - name: ls
       run: ls
 
-    - name: Generate Allure report
-      run: npm run allure-generate
+    # - name: Generate Allure report
+    #   run: npm run allure-generate
 
     - name: newman run test.json -e qa.json -r allure --reporter-allure-export allure-report
       run: newman run test.json -e qa.json -r allure --reporter-allure-export allure-report
