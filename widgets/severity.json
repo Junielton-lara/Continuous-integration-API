@@ -1,1 +1,1 @@
-[{"uid":"11a065f8eeea5f66","name":"consultacep","time":{"start":1678215741455,"stop":1678215742123,"duration":668},"status":"passed","severity":"normal"}]
+[{"uid":"e99a7d3719cf249b","name":"consultacep","time":{"start":1678216137930,"stop":1678216138334,"duration":404},"status":"passed","severity":"normal"},{"uid":"9228f7f8bdbef1c8","name":"consultacep COM ERRO","time":{"start":1678216138337,"stop":1678216138403,"duration":66},"status":"failed","severity":"normal"}]

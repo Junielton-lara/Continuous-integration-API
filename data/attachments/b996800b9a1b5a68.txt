@@ -1,0 +1,66 @@
+var data = JSON.parse(responseBody);
+
+
+pm.test("Status code deve ser 200", function () {
+    pm.response.to.have.status(200);
+});
+
+pm.test("ResponseBody deve obedecer aos tipos do schema", () => {
+    pm.response.to.have.jsonSchema(pm.variables.get("schema"));
+});
+
+
+pm.test("Validação dos Headers", function(){
+    pm.response.to.have.header("Cache-Control");
+    pm.response.to.have.header("Pragma");
+    pm.response.to.have.header("Access-Control-Allow-Origin","*");
+    pm.response.to.have.header("Access-Control-Allow-Methods","GETT");
+    pm.response.to.have.header("Access-Control-Allow-Headers").to.not.null
+    pm.response.to.have.header("Access-Control-Allow-Credentials").to.not.null
+    pm.response.to.have.header("Access-Control-Max-Age").to.not.null
+});
+
+function checkElementAttributes(element, attributes) {
+    var status = true;
+    var status2 = true;
+    for(var att in attributes) {
+        att = attributes[att];
+        status = element.hasOwnProperty(att);
+        if (!status) break;
+    }
+    if (status) {
+        for (var key in element) {
+            status2 = attributes.includes(key);
+            if (!status2) break;
+        }
+    }
+    if (status && status2) {
+        tests['O objeto retornado contem os campos informados'] = true;
+    } else {
+        if (!status) {
+            for(var att in attributes) {
+                att = attributes[att];
+                tests[`Verificando se o elemento contem o Atributo (${att})`] = element.hasOwnProperty(att);
+            }
+        } else {
+            for (var key in element) {
+                tests[`Verificando se o elemento contem o Atributo (${key})`] = attributes.includes(key);
+            }
+        }
+    }
+}
+const   contrato =         [
+           "cep","logradouro", "complemento", "bairro",
+            "localidade", "uf", "ibge","gia","ddd",        ];
+
+pm.test("ResponseBody deve obedecer os campos do contrato", () => {
+    checkElementAttributes(data,contrato);
+    });
+
+pm.test("Validação que o campo cep não deve ser null", function () {
+    pm.expect(data.ceep).to.not.null
+});
+
+pm.test("Validação presença do campo localidade no ResponseBody", function () {
+    pm.expect(data.localidade).to.exist
+});
