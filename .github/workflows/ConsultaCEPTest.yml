@@ -50,7 +50,7 @@ jobs:
 
     - name: Deploy report to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
-      with:
+       with:
     - name: Allure Report action from marketplace
        uses: simple-elf/allure-report-action@master
        if: always()
