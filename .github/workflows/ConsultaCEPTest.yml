@@ -40,6 +40,9 @@ jobs:
     - name: Run Postman tests
       run: npm run postman-test
 
+    - name: Run ls
+      run: npm run ls
+
     - name: Generate Allure report
       run: npm run allure-generate
 
