@@ -23,6 +23,12 @@ jobs:
 
     - name: Install dependencies
       run: npm ci
+      
+    - name: Install Newman-Reporter-Htmlextra
+      run: sudo npm install -g newman-reporter-htmlextra
+
+    - name: install -g newman-reporter-allure
+      run: sudo npm install -g newman-reporter-allure
 
     - name: Run Postman tests
       run: npm run postman-test
