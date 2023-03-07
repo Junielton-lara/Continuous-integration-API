@@ -51,9 +51,15 @@ jobs:
 
     # - name: Generate Allure report
     #   run: npm run allure-generate
+  
+    - name: npm install -g newman-reporter-allure
+      run: npm install -g newman-reporter-allure
 
     - name: newman run test.json -e qa.json -r allure --reporter-allure-export allure-report
       run: newman run ./test.json -e ./qa.json -r allure --reporter-allure-export allure-report
+
+    - name: ls
+      run: ls
 
     - name: allure generate allure-results --clean -o allure-report
       run: allure generate allure-results --clean -o allure-report

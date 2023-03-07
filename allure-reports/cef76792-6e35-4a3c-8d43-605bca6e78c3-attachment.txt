@@ -1,0 +1,9 @@
+function consultaCEP() {
+    var consultaCEP = ["07176690", "18550001"];
+
+    var randomItem = consultaCEP[Math.floor(Math.random() * consultaCEP.length)];
+    
+    return randomItem; 
+}
+    
+pm.environment.set("Cep", consultaCEP());

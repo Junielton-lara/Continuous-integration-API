@@ -1,0 +1,12 @@
+{
+  "cep": "18550-001",
+  "logradouro": "Rua Conselheiro Antônio Prado",
+  "complemento": "até 893/894",
+  "bairro": "Centro",
+  "localidade": "Boituva",
+  "uf": "SP",
+  "ibge": "3507001",
+  "gia": "2197",
+  "ddd": "15",
+  "siafi": "6239"
+}
