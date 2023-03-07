@@ -1,0 +1,72 @@
+function consultaCEP() {
+    var consultaCEP = ["07176690", "18550001"];
+
+    var randomItem = consultaCEP[Math.floor(Math.random() * consultaCEP.length)];
+    
+    return randomItem; 
+}
+    
+pm.environment.set("Cep", consultaCEP());
+
+pm.variables.set("schema", {
+    // "$schema": "http://json-schema.org/draft-06/schema#",
+    // "$ref": "#/definitions/Welcome3",
+    "definitions": {
+        "Welcome3": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "cep": {
+                    "type": "string"
+                },
+                "logradouro": {
+                    "type": "string"
+                },
+                "complemento": {
+                    "type": "string"
+                },
+                "bairro": {
+                    "type": "string"
+                },
+                "localidade": {
+                    "type": "string"
+                },
+                "uf": {
+                    "type": "string"
+                },
+                "ibge": {
+                    "type": "string",
+                    "format": "integer"
+                },
+                "gia": {
+                    "type": "string",
+                    "format": "integer"
+                },
+                "ddd": {
+                    "type": "string",
+                    "format": "integer"
+                },
+                "siafi": {
+                    "type": "string",
+                    "format": "integer"
+                }
+            },
+            "required": [
+                "bairro",
+                "cep",
+                "complemento",
+                "ddd",
+                "gia",
+                "ibge",
+                "localidade",
+                "logradouro",
+                "siafi",
+                "uf"
+            ],
+            "title": "Welcome3"
+        }
+    }
+}
+
+
+);
