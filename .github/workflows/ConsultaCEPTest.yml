@@ -51,6 +51,9 @@ jobs:
 
     - name: Generate Allure report
       run: npm run allure-generate
+
+    - name: ls
+      run: ls
   
     - name: npm install -g newman-reporter-allure
       run: npm install -g newman-reporter-allure
