@@ -1,25 +1,183 @@
-# name: Run Smoke Tests postman
+name: Postman tests and Allure report
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14.x'
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Run Postman tests
+      run: npm run postman-test
+
+    - name: Generate Allure report
+      run: npm run allure-generate
+
+    - name: Deploy report to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./allure-report
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# # name: Run Smoke Tests postman
+
+# # on:
+# #   workflow_dispatch:
+# #     inputs:
+# #       tags:
+# #         description: "Tests cenario postman"
+# #         required: true
+# #         default: "smoke"
+
+# # jobs:
+# #   run_smoke_tests:
+# #     runs-on: ubuntu-20.04
+
+# #     # defaults:
+# #     #   run:
+# #     #     shell: bash
+# #     #     working-directory: ./tests
+
+# #     steps:
+# #       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+# #       - uses: actions/checkout@v2
+
+# #       # Runs a set of commands using the runners shell
+# #       - name: Step 1 Check version Newman and Node
+# #         run: |
+# #           newman --version
+# #           node --version
+
+# #       - name: Step 2 Install Newman-Reporter-Htmlextra
+# #         run: sudo npm install -g newman-reporter-htmlextra
+
+# #       - name: Step 3 npm install -g newman-reporter-allure
+# #         run: sudo npm install -g newman-reporter-allure
+        
+# #       # - name: Prepare Allure history
+# #       #   run: |
+# #       #     cd ..
+# #       #     mkdir -p allure-results
+
+# #       - name: Step 3 Execute collection
+# #         run: newman run ./test.json -e ./qa.json -r allure --reporter-allure-export allure-report
+
+# #       - name: Get Allure history
+# #         uses: actions/checkout@v2
+# #         if: always()
+# #         continue-on-error: true
+        
+# #       - name: Step 3 Execute collection
+# #         run: newman run ./test.json -e ./qa.json -r allure --reporter-allure-export allure-report
+
+# #         with:
+# #           ref: gh-pages
+# #           path: gh-pages
+
+# #       - name: Allure Report action from marketplace
+# #         uses: simple-elf/allure-report-action@master
+# #         if: always()
+# #         id: allure-report
+# #         with:
+# #           allure_results: allure-results
+# #           gh_pages: gh-pages
+# #           allure_report: allure-report
+# #           allure_history: allure-history
+
+# #       - name: Deploy report to Github Pages
+# #         if: always()
+# #         uses: peaceiris/actions-gh-pages@v2
+# #         env:
+# #           PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+# #           PUBLISH_BRANCH: gh-pages
+# #           PUBLISH_DIR: allure-history
+
+
+# ########################################################################################################################
+# name: Pipeline de testes com allure-report
 
 # on:
-#   workflow_dispatch:
-#     inputs:
-#       tags:
-#         description: "Tests cenario postman"
-#         required: true
-#         default: "smoke"
+#   push:
+#     branches: [ main ]
+#   pull_request:
+#     branches: [ main ]
 
 # jobs:
-#   run_smoke_tests:
-#     runs-on: ubuntu-20.04
-
-#     # defaults:
-#     #   run:
-#     #     shell: bash
-#     #     working-directory: ./tests
+#   static-checking:
+#     runs-on: ubuntu-latest
 
 #     steps:
 #       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
 #       - uses: actions/checkout@v2
+
+#       # Runs a set of commands using the runners shell
+#       - name: Step 1 Check version Newman and Node
+#         run: |
+#           newman --version
+#           node --version
+
+#     # steps:
+#     # - uses: actions/checkout@v2
+#     # - name: Set up JDK 11
+#     #   uses: actions/setup-java@v2
+#     #   with:
+#     #     java-version: '11'
+#     #     distribution: 'adopt'
+        
+#     # - name: Step 1 Check version Newman and Node
+#     #   run: |
+#     #     newman --version
+#     #     node --version
+
+#     # - name: Step 2 Install Newman-Reporter-Htmlextra
+#     #   run: sudo npm install -g newman-reporter-htmlextra
+#     # - name: Step 3 npm install -g newman-reporter-allure
+#     #   run: sudo npm install -g newman-reporter-allure        
+#     # - name: Step 3 Execute collection
+#     #   run: newman run ./test.json -e ./qa.json -r allure --reporter-allure-export allure-report
+
+#   # Tests:
+#   #   runs-on: ubuntu-latest
+
+#     # steps:
+#       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+#       # - uses: actions/checkout@v2
 
 #       # Runs a set of commands using the runners shell
 #       - name: Step 1 Check version Newman and Node
@@ -33,22 +191,20 @@
 #       - name: Step 3 npm install -g newman-reporter-allure
 #         run: sudo npm install -g newman-reporter-allure
         
-#       # - name: Prepare Allure history
-#       #   run: |
-#       #     cd ..
-#       #     mkdir -p allure-results
 
 #       - name: Step 3 Execute collection
 #         run: newman run ./test.json -e ./qa.json -r allure --reporter-allure-export allure-report
+
+#       - name: mostrar camiinho
+#         run: echo $PWD
+#       - name: listar pasta
+#         run: ls
+
 
 #       - name: Get Allure history
 #         uses: actions/checkout@v2
 #         if: always()
 #         continue-on-error: true
-        
-#       - name: Step 3 Execute collection
-#         run: newman run ./test.json -e ./qa.json -r allure --reporter-allure-export allure-report
-
 #         with:
 #           ref: gh-pages
 #           path: gh-pages
@@ -70,102 +226,3 @@
 #           PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 #           PUBLISH_BRANCH: gh-pages
 #           PUBLISH_DIR: allure-history
-
-
-########################################################################################################################
-name: Pipeline de testes com allure-report
-
-on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
-
-jobs:
-  static-checking:
-    runs-on: ubuntu-latest
-
-    steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
-
-      # Runs a set of commands using the runners shell
-      - name: Step 1 Check version Newman and Node
-        run: |
-          newman --version
-          node --version
-
-    # steps:
-    # - uses: actions/checkout@v2
-    # - name: Set up JDK 11
-    #   uses: actions/setup-java@v2
-    #   with:
-    #     java-version: '11'
-    #     distribution: 'adopt'
-        
-    # - name: Step 1 Check version Newman and Node
-    #   run: |
-    #     newman --version
-    #     node --version
-
-    # - name: Step 2 Install Newman-Reporter-Htmlextra
-    #   run: sudo npm install -g newman-reporter-htmlextra
-    # - name: Step 3 npm install -g newman-reporter-allure
-    #   run: sudo npm install -g newman-reporter-allure        
-    # - name: Step 3 Execute collection
-    #   run: newman run ./test.json -e ./qa.json -r allure --reporter-allure-export allure-report
-
-  # Tests:
-  #   runs-on: ubuntu-latest
-
-    # steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      # - uses: actions/checkout@v2
-
-      # Runs a set of commands using the runners shell
-      - name: Step 1 Check version Newman and Node
-        run: |
-          newman --version
-          node --version
-
-      - name: Step 2 Install Newman-Reporter-Htmlextra
-        run: sudo npm install -g newman-reporter-htmlextra
-
-      - name: Step 3 npm install -g newman-reporter-allure
-        run: sudo npm install -g newman-reporter-allure
-        
-
-      - name: Step 3 Execute collection
-        run: newman run ./test.json -e ./qa.json -r allure --reporter-allure-export allure-report
-
-      - name: mostrar camiinho
-        run: echo $PWD
-      - name: listar pasta
-        run: ls
-
-
-      - name: Get Allure history
-        uses: actions/checkout@v2
-        if: always()
-        continue-on-error: true
-        with:
-          ref: gh-pages
-          path: gh-pages
-
-      - name: Allure Report action from marketplace
-        uses: simple-elf/allure-report-action@master
-        if: always()
-        id: allure-report
-        with:
-          allure_results: allure-results
-          gh_pages: gh-pages
-          allure_report: allure-report
-          allure_history: allure-history
-
-      - name: Deploy report to Github Pages
-        if: always()
-        uses: peaceiris/actions-gh-pages@v2
-        env:
-          PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PUBLISH_BRANCH: gh-pages
-          PUBLISH_DIR: allure-history
