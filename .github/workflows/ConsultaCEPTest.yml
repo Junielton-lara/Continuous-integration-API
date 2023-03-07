@@ -29,7 +29,7 @@ jobs:
 
     - name: install -g newman-reporter-allure
       run: sudo npm install -g newman-reporter-allure
-      
+
     - name: npm install -g newman-reporter-allure
       run: npm install -g newman-reporter-allure
 
@@ -64,7 +64,7 @@ jobs:
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./allure-report
+        publish_dir: allure-report
 
 
 
