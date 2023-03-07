@@ -30,6 +30,11 @@ jobs:
     - name: install -g newman-reporter-allure
       run: sudo npm install -g newman-reporter-allure
 
+    - name: npm install --save-dev allure-commandline
+      run: sudo npm install --save-dev allure-commandline
+      
+
+
     - name: Run Postman tests
       run: npm run postman-test
 
