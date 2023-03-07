@@ -43,7 +43,7 @@ jobs:
     #   run: npm run allure-generate
 
     - name: newman run test.json -e qa.json -r allure --reporter-allure-export allure-report
-      run: newman run test.json -e qa.json -r allure --reporter-allure-export allure-report
+      run: newman run ./test.json -e ./qa.json -r allure --reporter-allure-export allure-report
 
     - name: ls
       run: ls
